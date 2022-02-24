@@ -3,10 +3,15 @@
 
     <!--- LOGIN -->
 
-    <string name="hintUser">Nombre de usuario</string>
-    <string name="hintPassword">Password</string>
+    <string name="hintEmail">Email...</string>
+    <string name="hintPassword">Password...</string>
     <string name="btnIniciarSesion">Iniciar sesion</string>
     <string name="btnRegistrarse">Registrarse</string>
 
+    <!--- REGISTRO -->
 
+    <string name="registroNombreUsuario">Nombre de usuario...</string>
+    <string name="registroPassword">Password...</string>
+    <string name="registroEmail">Email...</string>
+    <string name="registroBtn">A COMER!</string>
 </resources>

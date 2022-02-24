@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "395991023460",
+    "project_id": "pizzeriaatipik-b6aa6",
+    "storage_bucket": "pizzeriaatipik-b6aa6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395991023460:android:12bdea815f7ff41e980471",
+        "android_client_info": {
+          "package_name": "com.example.atipik"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "395991023460-7976tn7mmepjtm013v8vis7cgjmbqpi8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBleO-K-UF4m5KQnC0euOIsAFd-bovJ9Lw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "395991023460-7976tn7mmepjtm013v8vis7cgjmbqpi8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
