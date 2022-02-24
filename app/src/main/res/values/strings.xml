@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Atipik</string>
+
+    <!--- LOGIN -->
+
+    <string name="hintUser">Nombre de usuario</string>
+    <string name="hintPassword">Password</string>
+    <string name="btnIniciarSesion">Iniciar sesion</string>
+    <string name="btnRegistrarse">Registrarse</string>
+
+
+</resources>
