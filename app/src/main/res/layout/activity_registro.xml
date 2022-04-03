@@ -14,10 +14,11 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="372dp"
         android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/btnPrimary"
         android:ems="10"
         android:hint="@string/registroNombreUsuario"
         android:inputType="textPersonName"
-        android:backgroundTint="@color/btnPrimary"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +35,7 @@
         android:ems="10"
         android:hint="@string/registroEmail"
         android:inputType="textEmailAddress"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nombreUsuario" />
@@ -49,12 +51,13 @@
         android:ems="10"
         android:hint="@string/registroPassword"
         android:inputType="textPassword"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/registrarse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
