@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Atipik</string>
+    <string name="hintEmail">Email...</string>
+    <string name="hintPassword">Contrasenya...</string>
+    <string name="btnIniciarSesion">Iniciar Sessió</string>
+    <string name="btnRegistrarse">Registrarse</string>
+    <string name="registroNombreUsuario">Nom d\'usuari...</string>
+    <string name="registroPassword">Contrasenya...</string>
+    <string name="registroEmail">Email...</string>
+    <string name="registroBtn">A MENJAR!</string>
+</resources>
