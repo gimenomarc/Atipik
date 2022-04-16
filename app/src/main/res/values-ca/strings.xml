@@ -8,5 +8,5 @@
     <string name="registroNombreUsuario">Nom d\'usuari...</string>
     <string name="registroPassword">Contrasenya...</string>
     <string name="registroEmail">Email...</string>
-    <string name="registroBtn">A MENJAR!</string>
+    <string name="registroBtn">Registrarse</string>
 </resources>

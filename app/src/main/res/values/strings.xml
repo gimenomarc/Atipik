@@ -13,5 +13,5 @@
     <string name="registroNombreUsuario">Nombre de Usuario...</string>
     <string name="registroPassword">Contraseña...</string>
     <string name="registroEmail">Email...</string>
-    <string name="registroBtn">A COMER!</string>
+    <string name="registroBtn">Registrarse</string>
 </resources>
