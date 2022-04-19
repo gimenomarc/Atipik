@@ -14,4 +14,13 @@
     <string name="registroPassword">Contraseña...</string>
     <string name="registroEmail">Email...</string>
     <string name="registroBtn">Registrarse</string>
+
+    <!--- REGISTRO -->
+    <string name="bienvenidoPlusExtra">Bienvenido</string>
+
+    <!--- BACKOFFICE -->
+    <string name="backofficeTitle">BackOffice</string>
+
+
+
 </resources>

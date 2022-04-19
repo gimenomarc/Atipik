@@ -17,7 +17,6 @@ class menuActivity : AppCompatActivity() {
         private lateinit var productRecyclerView: RecyclerView
         private lateinit var productArrayList: ArrayList<products>
 
-        val layoutManager = LinearLayoutManager(this)
 
         override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +28,13 @@ class menuActivity : AppCompatActivity() {
 
         productArrayList = arrayListOf<products>()
 
+        //EXTRAS
+        var textLayoutExtras = findViewById<TextView>(R.id.extraName)
+        val bundle = intent.extras
+        val nameExtra = bundle?.getString("nameExtra")
+        textLayoutExtras.text = "Bienvenido $nameExtra"
+
+        //FUNCTION GET PRODUCTS
         getProducts()
     }
 
@@ -42,19 +48,15 @@ class menuActivity : AppCompatActivity() {
                     for (productsSnapshot in snapshot.children){
                         val product = productsSnapshot.getValue(products::class.java)
                         productArrayList.add(product!!)
-
                     }
-
                     productRecyclerView.adapter = ProductAdapter(productArrayList)
-
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                print("****** onCancelled ******")
             }
 
         })
     }
-
 }

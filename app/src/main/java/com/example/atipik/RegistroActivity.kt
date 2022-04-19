@@ -57,42 +57,19 @@ class RegistroActivity : AppCompatActivity() {
 
         btnRegister.setOnClickListener {
 
-            if (nameText.text.toString().isNotEmpty() && passwordText.text.toString().isNotEmpty()){
-                println("IF OK.")
-
-                val add = HashMap<String, Any>()
-                add["Name"] = nameText.text.toString()
-                add["Email"] = emailText.text.toString()
-                add["Password"] = passwordText.text.toString()
-
-                db.collection("users")
-                    .add(add)
-                    .addOnCompleteListener {
-                        Toast.makeText(this, "data added", Toast.LENGTH_LONG).show()
-                    }
-                    .addOnFailureListener {
-                        Toast.makeText(this, "Data no added", Toast.LENGTH_LONG).show()
-                    }
-
-                auth.createUserWithEmailAndPassword(emailText.text.toString(), passwordText.text.toString()).addOnCompleteListener {
+                auth.createUserWithEmailAndPassword(emailText.text.toString(), passwordText.text.toString()).addOnCompleteListener(this) {
                     if (it.isSuccessful) {
                         print("Data ok")
+                        val intent = Intent(this, menuActivity::class.java);
+                        intent.putExtra("nameExtra", nameText.text.toString())
+                        startActivity(intent)
                     } else {
                         println("Data fail")
                     }
                 }
 
-            } else {
-                println("ALL EMPTY")
-                val toast = Toast.makeText(applicationContext, "Error: Algun campo vacio", Toast.LENGTH_LONG)
             }
         }
     }
-}
-
-
-
-
-
 
 

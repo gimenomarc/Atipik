@@ -60,15 +60,13 @@ class MainActivity : AppCompatActivity() {
                             if (it.isSuccessful) {
                                 val toast = Toast.makeText(applicationContext, "Registro ok", Toast.LENGTH_SHORT)
                                 val intent = Intent(this, menuActivity::class.java)
+                                intent.putExtra("nameExtra", textEmail.text.toString())
                                 startActivity(intent)
                             } else {
                                 val toast = Toast.makeText(applicationContext, "FAIL", Toast.LENGTH_SHORT)
                             }
+                        }
                     }
+                }
             }
         }
-    }
-
-
-
-}
