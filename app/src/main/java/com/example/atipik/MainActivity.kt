@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         bundle.putString("message", "FirebaseOk")
         analytics.logEvent("InitScreen", bundle)
 
+        test()
         setup()
     }
 
@@ -39,6 +40,16 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, menuActivity::class.java)
         startActivity(intent)
     }
+
+    private fun test( ) {
+        val btnTest = findViewById<Button>(R.id.test);
+
+        btnTest.setOnClickListener {
+            val intent = Intent(this, menuActivity::class.java);
+            startActivity(intent)
+        }
+    }
+
 
     private fun setup() {
         val btnIniciarSesion = findViewById<Button>(R.id.btnIniciarSesion)

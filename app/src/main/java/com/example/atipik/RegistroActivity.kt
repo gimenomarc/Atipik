@@ -21,6 +21,7 @@ import com.google.firebase.ktx.Firebase
 class RegistroActivity : AppCompatActivity() {
 
     //DDBB
+
     private lateinit var dbReference:DatabaseReference
     private lateinit var database:FirebaseDatabase
     private lateinit var auth:FirebaseAuth
@@ -34,13 +35,13 @@ class RegistroActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         dbReference = database.reference.child("User")
 
-
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro)
-
+        print("*************************************************************************")
         register()
     }
+
+
 
     private fun register() {
 
@@ -54,22 +55,31 @@ class RegistroActivity : AppCompatActivity() {
         val password = passwordText.text.toString()
 
         db = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
+
 
         btnRegister.setOnClickListener {
 
+            try {
                 auth.createUserWithEmailAndPassword(emailText.text.toString(), passwordText.text.toString()).addOnCompleteListener(this) {
+                    print("****************************************************************************************************")
                     if (it.isSuccessful) {
                         print("Data ok")
                         val intent = Intent(this, menuActivity::class.java);
                         intent.putExtra("nameExtra", nameText.text.toString())
                         startActivity(intent)
                     } else {
-                        println("Data fail")
+                        print("Data fail")
                     }
                 }
 
+            } catch (e: Exception) {
+                print("---------------------------------")
+                println(e)
+                print("---------------------------------")
             }
         }
     }
+}
 
 
