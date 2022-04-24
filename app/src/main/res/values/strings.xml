@@ -7,24 +7,29 @@
     <string name="hintPassword">Contraseña...</string>
     <string name="btnIniciarSesion">Iniciar Sesión</string>
     <string name="btnRegistrarse">Registrarse</string>
+    <string name="loginOk">Usuario correcto</string>
+    <string name="loginFail">Email o contraseña incorrectos</string>
+
 
     <!--- REGISTRO -->
     <string name="registroNombreUsuario">Nombre de Usuario...</string>
     <string name="registroPassword">Contraseña...</string>
     <string name="registroEmail">Email...</string>
     <string name="registroBtn">Registrarse</string>
-    <string name="bienvenidoPlusExtra">Bienvenido</string>
     <string name="faltanCampos">Faltan campos por rellenar</string>
     <string name="cuentaOk">Cuenta creada correctamente</string>
 
 
 
     <!--- BACKOFFICE -->
+    <string name="bienvenidoPlusExtra">BEINVENIDO/A</string>
     <string name="backofficeTitle">BackOffice</string>
     <string name="backofficeBtnVerLogs">Ver Logs</string>
 
     <!--- MENU PIZZAS -->
     <string name="btnAñadir">Añadir</string>
     <string name="btnComprar">Pagar </string>
+    <string name="toastCompraOk">Compra realizada correctamente </string>
+
 
 </resources>

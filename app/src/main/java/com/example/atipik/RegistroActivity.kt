@@ -28,14 +28,12 @@ class RegistroActivity : AppCompatActivity() {
     private lateinit var auth:FirebaseAuth
     private var db:FirebaseFirestore = FirebaseFirestore.getInstance()
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         //DDBB
         database = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
-        dbReference = database.reference.child("Users")
+        dbReference = database.reference
 
 
         super.onCreate(savedInstanceState)
@@ -51,15 +49,8 @@ class RegistroActivity : AppCompatActivity() {
         val passwordText = findViewById<EditText>(R.id.password)
         val btnRegister = findViewById<Button>(R.id.registrarse)
 
-        val name = nameText.text.toString()
-        val email = emailText.text.toString()
-        val password = passwordText.text.toString()
-
         db = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
-
-
-
 
         btnRegister.setOnClickListener {
             if (nameText.text.toString().isNotEmpty() && emailText.text.toString().isNotEmpty() && passwordText.text.toString().isNotEmpty() ) {
@@ -68,14 +59,15 @@ class RegistroActivity : AppCompatActivity() {
 
                         //Coger current user
                         val currentUser = auth.currentUser
-                        val email = currentUser!!.email
 
                         //Mapa valores
                         val add = HashMap<String, Any>()
                         add["Name"] = nameText.text.toString()
                         add["Email"] = emailText.text.toString()
                         add["Password"] = passwordText.text.toString()
+                        add["Type_user"] = "Client"
 
+                        //PINTAR USUARIO EN DDBB TABLA USERS. CREAR TABLA CON EL CURRENTUSER Y AÑADIR VALORES DEL HASHMAP ADD.
                         dbReference.child("Users").child(currentUser!!.uid).setValue(add)
 
                         Toast.makeText(this, applicationContext.getString(R.string.cuentaOk), Toast.LENGTH_SHORT).show()
@@ -84,7 +76,7 @@ class RegistroActivity : AppCompatActivity() {
                         intent.putExtra("nameExtra", nameText.text.toString())
                         startActivity(intent)
                     } else {
-                        print("Data fail")
+                        print("****** isSuccessful FAIL ******")
                     }
                 }
             } else {

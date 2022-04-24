@@ -10,13 +10,34 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
+import android.util.Log
+import android.widget.ProgressBar
+import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.firestore.auth.User
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var dbReference: DatabaseReference
+    private lateinit var database: FirebaseDatabase
+    private lateinit var auth: FirebaseAuth
+    private var db: FirebaseFirestore = FirebaseFirestore.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        database = FirebaseDatabase.getInstance()
+        auth = FirebaseAuth.getInstance()
+        dbReference = database.reference
 
         //Analitics Eventos
         val analytics: FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
@@ -28,7 +49,8 @@ class MainActivity : AppCompatActivity() {
         setup()
     }
 
-    private fun test( ) {
+    //BUTTON TESTING TOAST => MENU PIZZAS
+    private fun test() {
         val btnTest = findViewById<Button>(R.id.test);
 
         btnTest.setOnClickListener {
@@ -37,34 +59,66 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+    //FUNCTION LOGIC LOGIN
     private fun setup() {
         val btnIniciarSesion = findViewById<Button>(R.id.btnIniciarSesion)
         val btnRegistro = findViewById<Button>(R.id.btnRegistro)
         var textEmail = findViewById<EditText>(R.id.txtEmail)
         var textPassword = findViewById<EditText>(R.id.textPassword)
 
+        db = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
 
         btnRegistro.setOnClickListener {
             val intent = Intent(this, RegistroActivity::class.java);
             startActivity(intent)
         }
 
-        btnIniciarSesion.setOnClickListener {
-            if (textEmail.text.isNotBlank() && textPassword.text.isNotEmpty()) {
-                FirebaseAuth.getInstance()
-                    .signInWithEmailAndPassword(textEmail.text.toString(),
-                        textPassword.text.toString()).addOnCompleteListener {
+        try {
+            btnIniciarSesion.setOnClickListener {
+                if (textEmail.text.isNotEmpty() && textPassword.text.isNotEmpty()) {
+                    FirebaseAuth.getInstance()
+                        .signInWithEmailAndPassword(
+                            textEmail.text.toString(),
+                            textPassword.text.toString()
+                        )
+                        .addOnCompleteListener {
                             if (it.isSuccessful) {
-                                val toast = Toast.makeText(applicationContext, "Registro ok", Toast.LENGTH_SHORT)
-                                val intent = Intent(this, menuActivity::class.java)
-                                intent.putExtra("nameExtra", textEmail.text.toString())
-                                startActivity(intent)
-                            } else {
-                                val toast = Toast.makeText(applicationContext, "FAIL", Toast.LENGTH_SHORT)
+
+                                val currentUser = auth.currentUser
+
+                                dbReference.child("Users").child(currentUser!!.uid.toString()).get()
+                                    .addOnSuccessListener {
+                                        println(it.child("Type_user").value)
+                                        if (it.child("Type_user").value.toString() == "Client") {
+                                            val intent = Intent(this, menuActivity::class.java)
+                                            intent.putExtra("nameExtra", textEmail.text.toString())
+                                            startActivity(intent)
+                                        } else if (it.child("Type_user").value.toString() == "Admin") {
+                                            val intent = Intent(this, AdminActivity::class.java)
+                                            startActivity(intent)
+                                        }
+                                    }
                             }
                         }
-                    }
+                } else if (textEmail.text.isEmpty()) {
+                    Toast.makeText(
+                        this,
+                        applicationContext.getString(R.string.loginFail),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else if (textPassword.text.isEmpty()) {
+                    Toast.makeText(
+                        this,
+                        applicationContext.getString(R.string.loginFail),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
+
+        } catch (e: Exception) {
+            print(e)
         }
+
+    }
+}

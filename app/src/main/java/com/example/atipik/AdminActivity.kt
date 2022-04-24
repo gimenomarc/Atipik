@@ -23,6 +23,7 @@ class AdminActivity : AppCompatActivity() {
 
     private lateinit var database: DatabaseReference
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin)
