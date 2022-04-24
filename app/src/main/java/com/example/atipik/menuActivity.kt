@@ -23,29 +23,33 @@ import com.google.firebase.firestore.auth.User
 
 class menuActivity : AppCompatActivity() {
 
-        private lateinit var dbref : DatabaseReference
-        private lateinit var productRecyclerView: RecyclerView
-        private lateinit var productArrayList: ArrayList<products>
+    private lateinit var dbref: DatabaseReference
+    private lateinit var productRecyclerView: RecyclerView
+    private lateinit var productArrayList: ArrayList<products>
+    private lateinit var shoppingCart : ShoppingList
 
-        private lateinit var dbReference:DatabaseReference
-        private lateinit var database:FirebaseDatabase
-        private lateinit var auth:FirebaseAuth
-        private var db:FirebaseFirestore = FirebaseFirestore.getInstance()
+    private lateinit var dbReference: DatabaseReference
+    private lateinit var database: FirebaseDatabase
+    private lateinit var auth: FirebaseAuth
+    private var db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-        private lateinit var ProductAdapter : RecyclerView;
+    override fun onCreate(savedInstanceState: Bundle?) {
 
-        override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
-            db = FirebaseFirestore.getInstance()
-            auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
 
         productRecyclerView = findViewById(R.id.productList)
         productRecyclerView.layoutManager = LinearLayoutManager(this)
         productRecyclerView.setHasFixedSize(true)
         productArrayList = arrayListOf<products>()
         productRecyclerView.adapter = ProductAdapter(productArrayList)
+
+        shoppingCart = ShoppingList()
+        println(shoppingCart)
+
 
         //EXTRA HELLO USER
         var textLayoutExtras = findViewById<TextView>(R.id.extraName)
@@ -55,19 +59,16 @@ class menuActivity : AppCompatActivity() {
 
         //FUNCTION GET PRODUCTS
         getProducts()
-
-        // Shop
-        shoppingCart()
     }
 
     private fun getProducts() {
         dbref = FirebaseDatabase.getInstance().getReference("Products")
 
-        dbref.addValueEventListener(object: ValueEventListener{
+        dbref.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
-                    for (productsSnapshot in snapshot.children){
+                if (snapshot.exists()) {
+                    for (productsSnapshot in snapshot.children) {
                         val product = productsSnapshot.getValue(products::class.java)
                         productArrayList.add(product!!)
                     }
@@ -80,32 +81,19 @@ class menuActivity : AppCompatActivity() {
             }
         })
     }
-
-    private fun shoppingCart() {
-        val btnComprar = findViewById<Button>(R.id.btnRealizarCompra)
-        btnComprar.setOnClickListener {
-            val add = HashMap<String, Any>()
-            add["Name"] = "testing carrito de compra"
-            val currentUser = auth.currentUser
-            dbReference.child("Logs").child(currentUser!!.uid).setValue(add)
-            Toast.makeText(this, applicationContext.getString(R.string.toastCompraOk),Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun calculatePrice () : Int {
-        var price = 0;
-
-
-
-        return price;
-    }
 }
 
-class ProductAdapter (private val productList: ArrayList<products>) : RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
+class ProductAdapter(private val productList: ArrayList<products>) :
+    RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
+
+    private var shoppingCart : ShoppingList = ShoppingList()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.product_item,
-            parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(
+            R.layout.product_item,
+            parent, false
+        )
         return MyViewHolder(itemView)
     }
 
@@ -113,28 +101,33 @@ class ProductAdapter (private val productList: ArrayList<products>) : RecyclerVi
 
         val currentItem = productList[position]
 
-
-
         holder.name.text = currentItem.nombre
         holder.description.text = currentItem.descripcion
         holder.price.text = currentItem.precio
 
-        holder.name.setOnClickListener {
-            println("****************************************************************************")
+        holder.itemView.setOnClickListener {
+
+            println(currentItem.precio)
+            shoppingCart.shopList.add(currentItem)
+            println("**************************")
+            println(shoppingCart)
+            println(shoppingCart.shopList.size)
         }
+
     }
 
     override fun getItemCount(): Int {
         return productList.size
     }
 
-    class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view){
+    class MyViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
-        val name : TextView = itemView.findViewById(R.id.productName)
-        val description : TextView = itemView.findViewById(R.id.productDescription)
-        val price : TextView = itemView.findViewById(R.id.productPrice)
+        val name: TextView = itemView.findViewById(R.id.productName)
+        val description: TextView = itemView.findViewById(R.id.productDescription)
+        val price: TextView = itemView.findViewById(R.id.productPrice)
 
     }
+
 }
 
 

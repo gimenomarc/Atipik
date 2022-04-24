@@ -74,50 +74,45 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        try {
-            btnIniciarSesion.setOnClickListener {
-                if (textEmail.text.isNotEmpty() && textPassword.text.isNotEmpty()) {
-                    FirebaseAuth.getInstance()
-                        .signInWithEmailAndPassword(
-                            textEmail.text.toString(),
-                            textPassword.text.toString()
-                        )
-                        .addOnCompleteListener {
-                            if (it.isSuccessful) {
+        btnIniciarSesion.setOnClickListener {
+            if (textEmail.text.isNotEmpty() && textPassword.text.isNotEmpty()) {
+                FirebaseAuth.getInstance()
+                    .signInWithEmailAndPassword(
+                        textEmail.text.toString(),
+                        textPassword.text.toString()
+                    )
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
 
-                                val currentUser = auth.currentUser
+                            val currentUser = auth.currentUser
 
-                                dbReference.child("Users").child(currentUser!!.uid.toString()).get()
-                                    .addOnSuccessListener {
-                                        println(it.child("Type_user").value)
-                                        if (it.child("Type_user").value.toString() == "Client") {
-                                            val intent = Intent(this, menuActivity::class.java)
-                                            intent.putExtra("nameExtra", textEmail.text.toString())
-                                            startActivity(intent)
-                                        } else if (it.child("Type_user").value.toString() == "Admin") {
-                                            val intent = Intent(this, AdminActivity::class.java)
-                                            startActivity(intent)
-                                        }
+                            dbReference.child("Users").child(currentUser!!.uid.toString()).get()
+                                .addOnSuccessListener {
+                                    println(it.child("Type_user").value)
+                                    if (it.child("Type_user").value.toString() == "Client") {
+                                        val intent = Intent(this, menuActivity::class.java)
+                                        intent.putExtra("nameExtra", textEmail.text.toString())
+                                        startActivity(intent)
+                                    } else if (it.child("Type_user").value.toString() == "Admin") {
+                                        val intent = Intent(this, AdminActivity::class.java)
+                                        startActivity(intent)
                                     }
-                            }
+                                }
                         }
-                } else if (textEmail.text.isEmpty()) {
-                    Toast.makeText(
-                        this,
-                        applicationContext.getString(R.string.loginFail),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else if (textPassword.text.isEmpty()) {
-                    Toast.makeText(
-                        this,
-                        applicationContext.getString(R.string.loginFail),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+                    }
+            } else if (textEmail.text.isEmpty()) {
+                Toast.makeText(
+                    this,
+                    applicationContext.getString(R.string.loginFail),
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (textPassword.text.isEmpty()) {
+                Toast.makeText(
+                    this,
+                    applicationContext.getString(R.string.loginFail),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-
-        } catch (e: Exception) {
-            print(e)
         }
 
     }

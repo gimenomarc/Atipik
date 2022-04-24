@@ -1,4 +1,4 @@
 package com.example.atipik
 
-data class ShoppingList (val shopId : String ?= null, val productName : String ?= null, val productPrice : Int ?= null){
+data class ShoppingList (var shopList: ArrayList<products> = ArrayList<products>()){
 }
