@@ -16,6 +16,7 @@ import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.auth.User
 import com.google.firebase.ktx.Firebase
 
 class RegistroActivity : AppCompatActivity() {
@@ -28,20 +29,20 @@ class RegistroActivity : AppCompatActivity() {
     private var db:FirebaseFirestore = FirebaseFirestore.getInstance()
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         //DDBB
         database = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
-        dbReference = database.reference.child("User")
+        dbReference = database.reference.child("Users")
+
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro)
         print("*************************************************************************")
         register()
     }
-
-
 
     private fun register() {
 
@@ -58,13 +59,27 @@ class RegistroActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
 
-        btnRegister.setOnClickListener {
 
-            try {
+
+        btnRegister.setOnClickListener {
+            if (nameText.text.toString().isNotEmpty() && emailText.text.toString().isNotEmpty() && passwordText.text.toString().isNotEmpty() ) {
                 auth.createUserWithEmailAndPassword(emailText.text.toString(), passwordText.text.toString()).addOnCompleteListener(this) {
-                    print("****************************************************************************************************")
                     if (it.isSuccessful) {
-                        print("Data ok")
+
+                        //Coger current user
+                        val currentUser = auth.currentUser
+                        val email = currentUser!!.email
+
+                        //Mapa valores
+                        val add = HashMap<String, Any>()
+                        add["Name"] = nameText.text.toString()
+                        add["Email"] = emailText.text.toString()
+                        add["Password"] = passwordText.text.toString()
+
+                        dbReference.child("Users").child(currentUser!!.uid).setValue(add)
+
+                        Toast.makeText(this, applicationContext.getString(R.string.cuentaOk), Toast.LENGTH_SHORT).show()
+
                         val intent = Intent(this, menuActivity::class.java);
                         intent.putExtra("nameExtra", nameText.text.toString())
                         startActivity(intent)
@@ -72,12 +87,10 @@ class RegistroActivity : AppCompatActivity() {
                         print("Data fail")
                     }
                 }
-
-            } catch (e: Exception) {
-                print("---------------------------------")
-                println(e)
-                print("---------------------------------")
+            } else {
+                Toast.makeText(this, "Faltan campos por rellenar", Toast.LENGTH_SHORT).show()
             }
+
         }
     }
 }

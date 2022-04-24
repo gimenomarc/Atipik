@@ -9,18 +9,22 @@
     <string name="btnRegistrarse">Registrarse</string>
 
     <!--- REGISTRO -->
-
     <string name="registroNombreUsuario">Nombre de Usuario...</string>
     <string name="registroPassword">Contraseña...</string>
     <string name="registroEmail">Email...</string>
     <string name="registroBtn">Registrarse</string>
-
-    <!--- REGISTRO -->
     <string name="bienvenidoPlusExtra">Bienvenido</string>
+    <string name="faltanCampos">Faltan campos por rellenar</string>
+    <string name="cuentaOk">Cuenta creada correctamente</string>
+
+
 
     <!--- BACKOFFICE -->
     <string name="backofficeTitle">BackOffice</string>
+    <string name="backofficeBtnVerLogs">Ver Logs</string>
 
-
+    <!--- MENU PIZZAS -->
+    <string name="btnAñadir">Añadir</string>
+    <string name="btnComprar">Pagar </string>
 
 </resources>

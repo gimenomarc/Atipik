@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,20 +26,6 @@ class MainActivity : AppCompatActivity() {
 
         test()
         setup()
-    }
-
-    //Intent para pasar a actiivty Registrarse
-    fun goRegistrarse (view: View) {
-        val btnRegistrarse = findViewById<Button>(R.id.btnRegistro);
-        val intent = Intent(this, RegistroActivity::class.java)
-        startActivity(intent)
-    }
-
-    //Intent goHome
-    fun goGome (view: View) {
-        val btnIniciarSesion = findViewById<Button>(R.id.btnIniciarSesion)
-        val intent = Intent(this, menuActivity::class.java)
-        startActivity(intent)
     }
 
     private fun test( ) {
