@@ -20,16 +20,16 @@ import java.lang.Exception
 import androidx.appcompat.view.menu.ActionMenuItemView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.auth.User
+import java.security.Timestamp
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class menuActivity : AppCompatActivity() {
 
     private lateinit var dbref: DatabaseReference
     private lateinit var productRecyclerView: RecyclerView
     private lateinit var productArrayList: ArrayList<products>
-    private lateinit var shoppingCart : ShoppingList
-
-    private lateinit var dbReference: DatabaseReference
-    private lateinit var database: FirebaseDatabase
     private lateinit var auth: FirebaseAuth
     private var db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
@@ -47,18 +47,20 @@ class menuActivity : AppCompatActivity() {
         productArrayList = arrayListOf<products>()
         productRecyclerView.adapter = ProductAdapter(productArrayList)
 
-        shoppingCart = ShoppingList()
-        println(shoppingCart)
-
 
         //EXTRA HELLO USER
-        var textLayoutExtras = findViewById<TextView>(R.id.extraName)
+        val textLayoutExtras = findViewById<TextView>(R.id.extraName)
         val bundle = intent.extras
         val nameExtra = bundle?.getString("nameExtra").toString().uppercase()
         textLayoutExtras.text = "Bienvenido $nameExtra"
 
+
+
         //FUNCTION GET PRODUCTS
         getProducts()
+
+        //BUTTON BUY PRODUCTS
+        buyProducts()
     }
 
     private fun getProducts() {
@@ -81,12 +83,29 @@ class menuActivity : AppCompatActivity() {
             }
         })
     }
+
+    private fun buyProducts() {
+
+        val btnBuyProducts = findViewById<Button>(R.id.btnRealizarCompra)
+        btnBuyProducts.setOnClickListener {
+            //Mapa valores
+            /*
+            val addLog = HashMap<String, Any>()
+            add["PedidoName"] =
+            add["PedidosNamePizz"] = emailText.text.toString()
+            add["PedidoTotalPrice"] = passwordText.text.toString()
+
+            //PINTAR DATOS EN DDBB TABLA LOGS.
+            dbReference.child("Logs").child(currentUser!!.uid).setValue(addlog)
+            */
+        }
+    }
 }
 
 class ProductAdapter(private val productList: ArrayList<products>) :
     RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
 
-    private var shoppingCart : ShoppingList = ShoppingList()
+    var shoppingCart : ShoppingList = ShoppingList()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -105,15 +124,22 @@ class ProductAdapter(private val productList: ArrayList<products>) :
         holder.description.text = currentItem.descripcion
         holder.price.text = currentItem.precio
 
-        holder.itemView.setOnClickListener {
+        /*
+        val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z")
+        val currentDateAndTime: String = simpleDateFormat.format(Date())
+        currentDateAndTime = currentItem.date.toString()
+        */
 
+
+        holder.itemView.setOnClickListener {
             println(currentItem.precio)
             shoppingCart.shopList.add(currentItem)
             println("**************************")
             println(shoppingCart)
             println(shoppingCart.shopList.size)
-        }
 
+            holder.itemView.setBackgroundResource(R.color.onClickItem)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -125,7 +151,6 @@ class ProductAdapter(private val productList: ArrayList<products>) :
         val name: TextView = itemView.findViewById(R.id.productName)
         val description: TextView = itemView.findViewById(R.id.productDescription)
         val price: TextView = itemView.findViewById(R.id.productPrice)
-
     }
 
 }

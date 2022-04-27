@@ -9,4 +9,14 @@
     <string name="registroPassword">Contrasenya...</string>
     <string name="registroEmail">Email...</string>
     <string name="registroBtn">Registrarse</string>
+    <string name="loginOk">Usuari correcte</string>
+    <string name="loginFail">Email o contrasenya incorrectes</string>
+    <string name="faltanCampos">Falten camps per omplir</string>
+    <string name="cuentaOk">Compte creada correctament</string>
+    <string name="bienvenidoPlusExtra">BENVINGUT</string>
+    <string name="backofficeTitle">BackOffice</string>
+    <string name="backofficeBtnVerLogs">Veure Logs</string>
+    <string name="btnAñadir">Afegir</string>
+    <string name="btnComprar">Pagar</string>
+    <string name="toastCompraOk">Compra realitzada correctamaent</string>
 </resources>

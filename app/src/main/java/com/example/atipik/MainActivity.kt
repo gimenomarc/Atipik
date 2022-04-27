@@ -90,12 +90,15 @@ class MainActivity : AppCompatActivity() {
                                 .addOnSuccessListener {
                                     println(it.child("Type_user").value)
                                     if (it.child("Type_user").value.toString() == "Client") {
+                                        val nameOfUser = it.child("Name").value.toString()
                                         val intent = Intent(this, menuActivity::class.java)
-                                        intent.putExtra("nameExtra", textEmail.text.toString())
+                                        intent.putExtra("nameExtra", nameOfUser)
                                         startActivity(intent)
+                                        finish()
                                     } else if (it.child("Type_user").value.toString() == "Admin") {
                                         val intent = Intent(this, AdminActivity::class.java)
                                         startActivity(intent)
+                                        finish()
                                     }
                                 }
                         }

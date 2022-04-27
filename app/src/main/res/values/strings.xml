@@ -2,14 +2,12 @@
     <string name="app_name">Atipik</string>
 
     <!--- LOGIN -->
-
     <string name="hintEmail">Email...</string>
     <string name="hintPassword">Contraseña...</string>
     <string name="btnIniciarSesion">Iniciar Sesión</string>
     <string name="btnRegistrarse">Registrarse</string>
     <string name="loginOk">Usuario correcto</string>
     <string name="loginFail">Email o contraseña incorrectos</string>
-
 
     <!--- REGISTRO -->
     <string name="registroNombreUsuario">Nombre de Usuario...</string>
@@ -20,11 +18,11 @@
     <string name="cuentaOk">Cuenta creada correctamente</string>
 
 
-
     <!--- BACKOFFICE -->
     <string name="bienvenidoPlusExtra">BEINVENIDO/A</string>
     <string name="backofficeTitle">BackOffice</string>
     <string name="backofficeBtnVerLogs">Ver Logs</string>
+
 
     <!--- MENU PIZZAS -->
     <string name="btnAñadir">Añadir</string>

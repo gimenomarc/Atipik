@@ -10,4 +10,5 @@
     <color name="btnPrimary">#A100F2</color>
     <color name="btnSecundary">#073B3A</color>
     <color name="slow">#6A00F4</color>
+    <color name="onClickItem">#F097AA</color>
 </resources>

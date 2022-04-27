@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/logList"
     app:cardElevation="8dp"
     app:cardCornerRadius="8dp"
     android:layout_margin="16dp">
@@ -24,20 +25,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pizza: "
-                android:textColor="@color/black"
-                android:textSize="26dp"
+                android:text="Nombre: "
+                android:textColor="@color/white"
+                android:textSize="14dp"
                 />
 
             <TextView
-                android:id="@+id/productName"
+                android:id="@+id/logName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Margarita"
-                android:textColor="@color/black"
-                android:textSize="26dp"
-                android:textStyle="bold"/>
+                android:text="Marc"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -49,20 +50,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Descripción: "
-                android:textColor="@color/black"
-                android:textSize="20dp"
+                android:text="Pizzas: "
+                android:textColor="@color/white"
+                android:textSize="14dp"
                 />
 
             <TextView
-                android:id="@+id/productDescription"
+                android:id="@+id/logPizzas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Oregano, Tomate, Queso"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold"/>
+                android:text="Margarita, Carbonara"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -74,19 +75,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Precio: "
-                android:textColor="@color/black"
-                android:textSize="26dp"
+                android:text="Precio Total: "
+                android:textColor="@color/white"
+                android:textSize="14dp"
                 />
 
             <TextView
-                android:id="@+id/productPrice"
+                android:id="@+id/logTotalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="12 $"
-                android:textColor="@color/black"
-                android:textSize="22dp"
+                android:text="26$"
+                android:textColor="@color/white"
+                android:textSize="14dp"
                 android:textStyle="bold"/>
 
 

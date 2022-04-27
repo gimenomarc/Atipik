@@ -75,6 +75,7 @@ class RegistroActivity : AppCompatActivity() {
                         val intent = Intent(this, menuActivity::class.java);
                         intent.putExtra("nameExtra", nameText.text.toString())
                         startActivity(intent)
+                        finish()
                     } else {
                         print("****** isSuccessful FAIL ******")
                     }
