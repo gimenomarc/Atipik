@@ -25,7 +25,6 @@ class AdminActivity : AppCompatActivity() {
 
     private lateinit var dbref: DatabaseReference
     private lateinit var logRecyclerView: RecyclerView
-    private lateinit var logArrayList: ArrayList<ShoppingList>
     private lateinit var auth: FirebaseAuth
     private var db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
@@ -35,60 +34,71 @@ class AdminActivity : AppCompatActivity() {
 
         db = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
-
+        var mock : MutableList<HashMap<String, Any>> = mutableListOf<HashMap<String, Any>>()
+        var mockMap : HashMap<String, Any> = HashMap<String, Any>()
+        mockMap["user"] = "Jorge"
+        mockMap["pizzas"] = "Test"
+        mockMap["total"] = 1.2
+        mock.add(mockMap)
         logRecyclerView = findViewById(R.id.recyclerViewLogs)
         logRecyclerView.layoutManager = LinearLayoutManager(this)
         logRecyclerView.setHasFixedSize(true)
-
-        logArrayList = arrayListOf<ShoppingList>(
-            ShoppingList(
-                1,
-                "name",
-                arrayListOf<products>(products("test", "test", "test", "test"))
-            ),
-            ShoppingList(1, "name", arrayListOf<products>(products("test", "test", "test", "test")))
-        )
-        logRecyclerView.adapter = LogAdapter(logArrayList)
-
-        getLogs()
+        logRecyclerView.adapter = LogAdapter(mock)
     }
 
-    private fun getLogs() {
+    private fun getLogs(): MutableList<HashMap<String, Any>> {
 
+        val listCards: MutableList<HashMap<String, Any>> = mutableListOf<HashMap<String, Any>>()
         dbref = FirebaseDatabase.getInstance().getReference("Logs")
 
         dbref.get().addOnSuccessListener {
             val children = it!!.children
-            children.forEach {
-                println(it.child("shopList"))
-                println(it.toString())
+            var counter = it.childrenCount
+            children.forEachIndexed { index, el ->
+                var childrenNested = el!!.children
+                val card = HashMap<String, Any>()
+                childrenNested.forEachIndexed { i, element ->
+                    if (element.key == "nameUser") {
+                        card["user"] = element.getValue(String::class.java) as String
+                    }
+                    if (element.key == "pizzasString") {
+                        card["pizzas"] = element.getValue(String::class.java) as String
+                    }
+                    if (element.key == "total") {
+                        card["total"] = element.getValue(Double::class.java) as Double
+                    }
+                }
+                listCards.add(card)
+                if (counter.toInt() - 1 == index) {
+                    println("///////////////")
+                    println(listCards)
+
+                }
             }
 
         }
-        //logRecyclerView.adapter = LogAdapter(logArrayList)
-
-
+        //logRecyclerView.adapter = LogAdapter(listCards)
+        println(listCards)
+        return listCards
     }
 
 
 }
 
-class LogAdapter(private val logList: ArrayList<ShoppingList>) :
+class LogAdapter(var cardList: MutableList<HashMap<String, Any>>) :
     RecyclerView.Adapter<LogAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-
+        println(cardList)
         val itemView = LayoutInflater.from(parent.context).inflate(
             R.layout.log_item,
             parent, false
         )
         return MyViewHolder(itemView)
-
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        val currentItem = logList[position]
 
         holder.name.text = "test1"
         holder.pizzas.text = "test2"
@@ -96,11 +106,13 @@ class LogAdapter(private val logList: ArrayList<ShoppingList>) :
 
     }
 
+
     override fun getItemCount(): Int {
 
-        return logList.size
+        return 0
 
     }
+
 
     class MyViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = itemView.findViewById(R.id.logName)

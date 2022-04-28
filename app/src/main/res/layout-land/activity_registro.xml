@@ -7,15 +7,6 @@
     tools:context=".RegistroActivity"
     android:background="@drawable/pizza">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:orientation="horizontal" >
-
-
-    </LinearLayout>
-
     <Button
         android:id="@+id/registrarse"
         android:layout_width="match_parent"
@@ -27,7 +18,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="352dp" />
+        tools:layout_editor_absoluteY="352dp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/nombreUsuario"
@@ -62,7 +54,8 @@
         app:layout_constraintEnd_toStartOf="@+id/password"
         app:layout_constraintStart_toEndOf="@+id/nombreUsuario"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        />
 
     <EditText
         android:id="@+id/password"
@@ -79,6 +72,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/email"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

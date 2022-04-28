@@ -35,12 +35,14 @@
         android:layout_marginEnd="32dp"
         android:backgroundTint="@color/slow"
         android:ems="10"
+        android:text="adminadmin"
         android:hint="@string/hintPassword"
         android:inputType="textPassword"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/txtEmail"
+         />
 
     <Button
         android:id="@+id/btnIniciarSesion"
@@ -78,11 +80,13 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
+        android:text="admin@admin.admin"
         android:hint="@string/hintEmail"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

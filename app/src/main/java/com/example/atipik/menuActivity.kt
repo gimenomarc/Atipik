@@ -26,7 +26,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-var shoppingCart: ShoppingList = ShoppingList(System.currentTimeMillis() / 1000L)
+var currentTime : Long = System.currentTimeMillis() / 1000L
+var shoppingCart: ShoppingList = ShoppingList(currentTime)
 
 class menuActivity : AppCompatActivity() {
 
@@ -92,9 +93,10 @@ class menuActivity : AppCompatActivity() {
         val btnBuyProducts = findViewById<Button>(R.id.btnRealizarCompra)
         btnBuyProducts.setOnClickListener {
 
-            dbref = FirebaseDatabase.getInstance().getReference("Logs")
+            dbref = FirebaseDatabase.getInstance().getReference("Logs").child(currentTime.toString())
 
             //PINTAR DATOS EN DDBB TABLA LOGS.
+            shoppingCart.buy()
             dbref.setValue(shoppingCart)
         }
     }
