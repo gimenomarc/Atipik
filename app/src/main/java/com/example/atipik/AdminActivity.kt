@@ -36,10 +36,18 @@ class AdminActivity : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
-        logRecyclerView = findViewById(R.id.logList)
+        logRecyclerView = findViewById(R.id.recyclerViewLogs)
         logRecyclerView.layoutManager = LinearLayoutManager(this)
         logRecyclerView.setHasFixedSize(true)
-        logArrayList = arrayListOf<ShoppingList>()
+
+        logArrayList = arrayListOf<ShoppingList>(
+            ShoppingList(
+                1,
+                "name",
+                arrayListOf<products>(products("test", "test", "test", "test"))
+            ),
+            ShoppingList(1, "name", arrayListOf<products>(products("test", "test", "test", "test")))
+        )
         logRecyclerView.adapter = LogAdapter(logArrayList)
 
         getLogs()
@@ -49,22 +57,17 @@ class AdminActivity : AppCompatActivity() {
 
         dbref = FirebaseDatabase.getInstance().getReference("Logs")
 
-        dbref.addValueEventListener(object : ValueEventListener {
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    for (logSnapshot in snapshot.children) {
-                        val log = logSnapshot.getValue(ShoppingList::class.java)
-                        logArrayList.add(log!!)
-                    }
-                    logRecyclerView.adapter = LogAdapter(logArrayList)
-                }
+        dbref.get().addOnSuccessListener {
+            val children = it!!.children
+            children.forEach {
+                println(it.child("shopList"))
+                println(it.toString())
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                print("****** onCancelled ******")
-            }
-        })
+        }
+        //logRecyclerView.adapter = LogAdapter(logArrayList)
+
+
     }
 
 
@@ -87,11 +90,10 @@ class LogAdapter(private val logList: ArrayList<ShoppingList>) :
 
         val currentItem = logList[position]
 
-        /*
-        holder.name.text = currentItem.pedidoName
-        holder.pizzas.text = currentItem.pedidoPizz
-        holder.totalPrice.text = currentItem.pedidoPrice
-        */
+        holder.name.text = "test1"
+        holder.pizzas.text = "test2"
+        holder.totalPrice.text = "23"
+
     }
 
     override fun getItemCount(): Int {

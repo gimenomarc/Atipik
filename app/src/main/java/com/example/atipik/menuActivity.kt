@@ -24,10 +24,13 @@ import java.security.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+
+var shoppingCart: ShoppingList = ShoppingList(System.currentTimeMillis() / 1000L)
 
 class menuActivity : AppCompatActivity() {
 
-    private lateinit var dbref: DatabaseReference
+    lateinit var dbref: DatabaseReference
     private lateinit var productRecyclerView: RecyclerView
     private lateinit var productArrayList: ArrayList<products>
     private lateinit var auth: FirebaseAuth
@@ -53,7 +56,7 @@ class menuActivity : AppCompatActivity() {
         val bundle = intent.extras
         val nameExtra = bundle?.getString("nameExtra").toString().uppercase()
         textLayoutExtras.text = "Bienvenido $nameExtra"
-
+        shoppingCart.nameUser = nameExtra
 
 
         //FUNCTION GET PRODUCTS
@@ -88,16 +91,11 @@ class menuActivity : AppCompatActivity() {
 
         val btnBuyProducts = findViewById<Button>(R.id.btnRealizarCompra)
         btnBuyProducts.setOnClickListener {
-            //Mapa valores
-            /*
-            val addLog = HashMap<String, Any>()
-            add["PedidoName"] =
-            add["PedidosNamePizz"] = emailText.text.toString()
-            add["PedidoTotalPrice"] = passwordText.text.toString()
+
+            dbref = FirebaseDatabase.getInstance().getReference("Logs")
 
             //PINTAR DATOS EN DDBB TABLA LOGS.
-            dbReference.child("Logs").child(currentUser!!.uid).setValue(addlog)
-            */
+            dbref.setValue(shoppingCart)
         }
     }
 }
@@ -105,7 +103,6 @@ class menuActivity : AppCompatActivity() {
 class ProductAdapter(private val productList: ArrayList<products>) :
     RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
 
-    var shoppingCart : ShoppingList = ShoppingList()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -124,7 +121,7 @@ class ProductAdapter(private val productList: ArrayList<products>) :
         holder.description.text = currentItem.descripcion
         holder.price.text = currentItem.precio
 
-        /*
+        /* TIMESTAMP
         val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z")
         val currentDateAndTime: String = simpleDateFormat.format(Date())
         currentDateAndTime = currentItem.date.toString()
@@ -151,6 +148,8 @@ class ProductAdapter(private val productList: ArrayList<products>) :
         val name: TextView = itemView.findViewById(R.id.productName)
         val description: TextView = itemView.findViewById(R.id.productDescription)
         val price: TextView = itemView.findViewById(R.id.productPrice)
+
+
     }
 
 }

@@ -8,6 +8,8 @@
     <string name="btnRegistrarse">Registrarse</string>
     <string name="loginOk">Usuario correcto</string>
     <string name="loginFail">Email o contraseña incorrectos</string>
+    <string name="imageLogIn">Imagen del login</string>
+
 
     <!--- REGISTRO -->
     <string name="registroNombreUsuario">Nombre de Usuario...</string>
@@ -26,6 +28,9 @@
 
     <!--- MENU PIZZAS -->
     <string name="btnAñadir">Añadir</string>
+    <string name="textPizza">Pizza: </string>
+    <string name="textDescription">Descripción: </string>
+    <string name="textPrice">Precio: </string>
     <string name="btnComprar">Pagar </string>
     <string name="toastCompraOk">Compra realizada correctamente </string>
 
