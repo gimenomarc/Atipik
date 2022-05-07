@@ -8,10 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
@@ -20,13 +17,14 @@ import java.lang.Exception
 import androidx.appcompat.view.menu.ActionMenuItemView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.auth.User
+import com.google.rpc.context.AttributeContext
 import java.security.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-var currentTime : Long = System.currentTimeMillis() / 1000L
+var currentTime: Long = System.currentTimeMillis() / 1000L
 var shoppingCart: ShoppingList = ShoppingList(currentTime)
 
 class menuActivity : AppCompatActivity() {
@@ -41,6 +39,8 @@ class menuActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+
+
 
         db = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
@@ -65,6 +65,9 @@ class menuActivity : AppCompatActivity() {
 
         //BUTTON BUY PRODUCTS
         buyProducts()
+
+        //LOGOUT BTN
+        logOut()
     }
 
     private fun getProducts() {
@@ -93,18 +96,34 @@ class menuActivity : AppCompatActivity() {
         val btnBuyProducts = findViewById<Button>(R.id.btnRealizarCompra)
         btnBuyProducts.setOnClickListener {
 
-            dbref = FirebaseDatabase.getInstance().getReference("Logs").child(currentTime.toString())
+            dbref =
+                FirebaseDatabase.getInstance().getReference("Logs").child(currentTime.toString())
 
             //PINTAR DATOS EN DDBB TABLA LOGS.
             shoppingCart.buy()
             dbref.setValue(shoppingCart)
+            Toast.makeText(
+                this,
+                applicationContext.getString(R.string.toastCompraOk),
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
+    private fun logOut() {
+
+        val btnLogOut = findViewById<ImageButton>(R.id.btnLogOut)
+        btnLogOut.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            Toast.makeText(this, applicationContext.getString(R.string.btnLogOut), Toast.LENGTH_LONG).show()
+            val intent = Intent(this, MainActivity::class.java);
+            startActivity(intent)
         }
     }
 }
 
 class ProductAdapter(private val productList: ArrayList<products>) :
     RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -122,13 +141,6 @@ class ProductAdapter(private val productList: ArrayList<products>) :
         holder.name.text = currentItem.nombre
         holder.description.text = currentItem.descripcion
         holder.price.text = currentItem.precio
-
-        /* TIMESTAMP
-        val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z")
-        val currentDateAndTime: String = simpleDateFormat.format(Date())
-        currentDateAndTime = currentItem.date.toString()
-        */
-
 
         holder.itemView.setOnClickListener {
             println(currentItem.precio)

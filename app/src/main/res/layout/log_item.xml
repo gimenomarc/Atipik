@@ -25,7 +25,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nombre: "
+                android:text="@string/backofficeUsuario"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 />
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8sp"
-                android:text="Marc"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 />
@@ -50,7 +50,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pizzas: "
+                android:text="@string/backofficePizzas"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 />
@@ -60,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8sp"
-                android:text="Margarita, Carbonara"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 />
@@ -75,7 +75,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Precio Total: "
+                android:text="@string/backofficesPrecio"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 />
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8sp"
-                android:text="26$"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold"/>

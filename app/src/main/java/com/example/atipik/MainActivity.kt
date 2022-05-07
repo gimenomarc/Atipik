@@ -17,6 +17,7 @@ import com.google.firebase.ktx.Firebase
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.util.Log
+import android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 import android.widget.ProgressBar
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseUser
@@ -35,6 +36,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Quitar barra de estado
+        window.decorView.apply {
+            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
+        }
+
         database = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
         dbReference = database.reference
@@ -45,26 +51,15 @@ class MainActivity : AppCompatActivity() {
         bundle.putString("message", "FirebaseOk")
         analytics.logEvent("InitScreen", bundle)
 
-        test()
         setup()
-    }
-
-    //BUTTON TESTING TOAST => MENU PIZZAS
-    private fun test() {
-        val btnTest = findViewById<Button>(R.id.test);
-
-        btnTest.setOnClickListener {
-            val intent = Intent(this, menuActivity::class.java);
-            startActivity(intent)
-        }
     }
 
     //FUNCTION LOGIC LOGIN
     private fun setup() {
         val btnIniciarSesion = findViewById<Button>(R.id.btnIniciarSesion)
         val btnRegistro = findViewById<Button>(R.id.btnRegistro)
-        var textEmail = findViewById<EditText>(R.id.txtEmail)
-        var textPassword = findViewById<EditText>(R.id.textPassword)
+        val textEmail = findViewById<EditText>(R.id.txtEmail)
+        val textPassword = findViewById<EditText>(R.id.textPassword)
 
         db = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
@@ -96,7 +91,7 @@ class MainActivity : AppCompatActivity() {
                                         startActivity(intent)
                                         finish()
                                     } else if (it.child("Type_user").value.toString() == "Admin") {
-                                        val intent = Intent(this, AdminActivity::class.java)
+                                        val intent = Intent(this, LogActivity::class.java)
                                         startActivity(intent)
                                         finish()
                                     }

@@ -19,4 +19,13 @@
     <string name="btnAñadir">Add</string>
     <string name="btnComprar">Pay</string>
     <string name="toastCompraOk">"purchase made correctly "</string>
+    <string name="imageLogIn">Login image</string>
+    <string name="textPizza">"Pizza: "</string>
+    <string name="textDescription">"Description: "</string>
+    <string name="textPrice">"Price: "</string>
+    <string name="btnLogOut">Logging off</string>
+    <string name="backofficeTicketId">"Ticket ID: "</string>
+    <string name="backofficeUsuario">"User: "</string>
+    <string name="backofficePizzas">"Pizza: "</string>
+    <string name="backofficesPrecio">"Price: "</string>
 </resources>

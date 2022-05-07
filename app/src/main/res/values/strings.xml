@@ -24,6 +24,10 @@
     <string name="bienvenidoPlusExtra">BEINVENIDO/A</string>
     <string name="backofficeTitle">BackOffice</string>
     <string name="backofficeBtnVerLogs">Ver Logs</string>
+    <string name="backofficeTicketId">Ticket ID:</string>
+    <string name="backofficeUsuario">Usuario: </string>
+    <string name="backofficePizzas">Pizzas: </string>
+    <string name="backofficesPrecio">Precio: </string>
 
 
     <!--- MENU PIZZAS -->
@@ -32,7 +36,8 @@
     <string name="textDescription">Descripción: </string>
     <string name="textPrice">Precio: </string>
     <string name="btnComprar">Pagar </string>
-    <string name="toastCompraOk">Compra realizada correctamente </string>
+    <string name="toastCompraOk">Compra realizada correctamente</string>
+    <string name="btnLogOut">Cerrando sesión</string>
 
 
 </resources>

@@ -1,6 +1,10 @@
 package com.example.atipik
 
-data class ShoppingList (var ticketId : Long ?= null, var nameUser : String ?= null, var shopList: ArrayList<products> = ArrayList<products>(), var total : Double ?= 0.0, var pizzasString : String ?= null){
+data class ShoppingList (var ticketId : Long ?= null,
+                         var nameUser : String ?= null,
+                         var shopList: ArrayList<products> = ArrayList<products>(),
+                         var total : Double ?= 0.0,
+                         var pizzasString : String ?= null){
 
     fun buy(): Unit {
         pizzasString = ""
@@ -13,7 +17,18 @@ data class ShoppingList (var ticketId : Long ?= null, var nameUser : String ?= n
     }
 
     fun getTotal(price : Double) : Unit {
+        total = Math.round(price * 1000.0) / 1000.0
         total = price
     }
 
 }
+
+
+
+
+
+
+
+
+
+

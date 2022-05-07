@@ -19,4 +19,13 @@
     <string name="btnAñadir">Afegir</string>
     <string name="btnComprar">Pagar</string>
     <string name="toastCompraOk">Compra realitzada correctamaent</string>
+    <string name="imageLogIn">Imatge del login</string>
+    <string name="textPizza">"Pizza: "</string>
+    <string name="textDescription">"Descripció: "</string>
+    <string name="textPrice">"Preu: "</string>
+    <string name="btnLogOut">Tancant la sessió</string>
+    <string name="backofficeTicketId">"Ticket ID: "</string>
+    <string name="backofficeUsuario">"Usuari: "</string>
+    <string name="backofficePizzas">"Pizza: "</string>
+    <string name="backofficesPrecio">"Preu: "</string>
 </resources>
