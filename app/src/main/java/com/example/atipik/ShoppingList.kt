@@ -19,9 +19,7 @@ data class ShoppingList (var ticketId : Long ?= null,
     fun getTotal(price : Double) : Unit {
         total = Math.round(price * 1000.0) / 1000.0
         total = price
-        println("testing fork")
     }
-
 }
 
 
