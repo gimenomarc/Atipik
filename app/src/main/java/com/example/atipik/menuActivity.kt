@@ -1,10 +1,8 @@
 package com.example.atipik
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,16 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
-import java.lang.Exception
-import androidx.appcompat.view.menu.ActionMenuItemView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.auth.User
-import com.google.rpc.context.AttributeContext
-import java.security.Timestamp
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 var currentTime: Long = System.currentTimeMillis() / 1000L
 var shoppingCart: ShoppingList = ShoppingList(currentTime)

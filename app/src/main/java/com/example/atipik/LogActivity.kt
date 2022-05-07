@@ -43,7 +43,7 @@ class LogActivity : AppCompatActivity() {
                 if (snapshot.exists()) {
                     for (logSnapshot in snapshot.children.reversed()) {
                         val log = logSnapshot.getValue(ShoppingList::class.java)
-                        logArrayList.asReversed().add(log!!)
+                        logArrayList.add(log!!)
                     }
                     logRecyclerView.adapter = NewLogAdapter(logArrayList)
                 }

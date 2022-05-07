@@ -23,8 +23,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewLogs"
-        android:layout_width="412dp"
-        android:layout_height="629dp"
+        android:layout_width="410dp"
+        android:layout_height="577dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
