@@ -28,6 +28,7 @@
     <string name="backofficeUsuario">Usuario: </string>
     <string name="backofficePizzas">Pizzas: </string>
     <string name="backofficesPrecio">Precio: </string>
+    <string name="BtnLogOutDescription">LogOutDescription</string>
 
 
     <!--- MENU PIZZAS -->

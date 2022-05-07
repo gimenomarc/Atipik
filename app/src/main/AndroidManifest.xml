@@ -23,7 +23,7 @@
             android:name=".AdminActivity"
             android:exported="false" />
         <activity
-            android:name=".menuActivity"
+            android:name=".MenuActivity"
             android:exported="false" />
         <activity
             android:name=".RegistroActivity"

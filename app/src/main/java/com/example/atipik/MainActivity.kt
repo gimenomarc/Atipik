@@ -3,27 +3,14 @@ package com.example.atipik
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
-import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
-import android.util.Log
-import android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-import android.widget.ProgressBar
-import com.google.firebase.auth.EmailAuthProvider
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.firestore.auth.User
-import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,11 +22,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        // Quitar barra de estado
-        window.decorView.apply {
-            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
-        }
 
         database = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
@@ -81,12 +63,12 @@ class MainActivity : AppCompatActivity() {
 
                             val currentUser = auth.currentUser
 
-                            dbReference.child("Users").child(currentUser!!.uid.toString()).get()
+                            dbReference.child("Users").child(currentUser!!.uid).get()
                                 .addOnSuccessListener {
                                     println(it.child("Type_user").value)
                                     if (it.child("Type_user").value.toString() == "Client") {
                                         val nameOfUser = it.child("Name").value.toString()
-                                        val intent = Intent(this, menuActivity::class.java)
+                                        val intent = Intent(this, MenuActivity::class.java)
                                         intent.putExtra("nameExtra", nameOfUser)
                                         startActivity(intent)
                                         finish()

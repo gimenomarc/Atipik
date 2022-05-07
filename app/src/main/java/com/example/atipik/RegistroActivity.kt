@@ -13,10 +13,10 @@ import com.google.firebase.database.FirebaseDatabase
 
 class RegistroActivity : AppCompatActivity() {
 
-    private lateinit var dbReference:DatabaseReference
-    private lateinit var database:FirebaseDatabase
-    private lateinit var auth:FirebaseAuth
-    private var db:FirebaseFirestore = FirebaseFirestore.getInstance()
+    private lateinit var dbReference: DatabaseReference
+    private lateinit var database: FirebaseDatabase
+    private lateinit var auth: FirebaseAuth
+    private var db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -41,26 +41,40 @@ class RegistroActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         btnRegister.setOnClickListener {
-            if (nameText.text.toString().isNotEmpty() && emailText.text.toString().isNotEmpty() && passwordText.text.toString().isNotEmpty() ) {
-                auth.createUserWithEmailAndPassword(emailText.text.toString(), passwordText.text.toString()).addOnCompleteListener(this) {
+            if (nameText.text.toString().isNotEmpty() && emailText.text.toString()
+                    .isNotEmpty() && passwordText.text.toString().isNotEmpty()
+            ) {
+                auth.createUserWithEmailAndPassword(
+                    emailText.text.toString(),
+                    passwordText.text.toString()
+                ).addOnCompleteListener(this) {
                     if (it.isSuccessful) {
-                        lateinit var newCurrentUser : Any
+                        lateinit var newCurrentUser: Any
 
-                        if ( emailText.text.toString().contains("@atipik.com", ignoreCase = true) ){
-                            newCurrentUser = Administrator(nameText.text.toString(), emailText.text.toString(), passwordText.text.toString())
+                        if (emailText.text.toString().contains("@atipik.com", ignoreCase = true)) {
+                            newCurrentUser = Administrator(
+                                nameText.text.toString(),
+                                emailText.text.toString(),
+                                passwordText.text.toString()
+                            )
                         } else {
-                            newCurrentUser = Client(nameText.text.toString(), emailText.text.toString(), passwordText.text.toString())
+                            newCurrentUser = Client(
+                                nameText.text.toString(),
+                                emailText.text.toString(),
+                                passwordText.text.toString()
+                            )
                         }
 
-                        //Coger current user
                         val currentUser = auth.currentUser
-
-                        //PINTAR USUARIO EN DDBB TABLA USERS. CREAR TABLA CON EL CURRENTUSER Y AÑADIR VALORES DEL HASHMAP ADD.
                         dbReference.child("Users").child(currentUser!!.uid).setValue(newCurrentUser)
 
-                        Toast.makeText(this, applicationContext.getString(R.string.cuentaOk), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            applicationContext.getString(R.string.cuentaOk),
+                            Toast.LENGTH_SHORT
+                        ).show()
 
-                        val intent = Intent(this, menuActivity::class.java);
+                        val intent = Intent(this, MenuActivity::class.java);
                         intent.putExtra("nameExtra", nameText.text.toString())
                         startActivity(intent)
                         finish()

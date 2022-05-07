@@ -17,11 +17,11 @@ import kotlin.collections.ArrayList
 var currentTime: Long = System.currentTimeMillis() / 1000L
 var shoppingCart: ShoppingList = ShoppingList(currentTime)
 
-class menuActivity : AppCompatActivity() {
+class MenuActivity : AppCompatActivity() {
 
-    lateinit var dbref: DatabaseReference
+    private lateinit var dbref: DatabaseReference
     private lateinit var productRecyclerView: RecyclerView
-    private lateinit var productArrayList: ArrayList<products>
+    private lateinit var productArrayList: ArrayList<Products>
     private lateinit var auth: FirebaseAuth
     private var db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
@@ -38,7 +38,7 @@ class menuActivity : AppCompatActivity() {
         productRecyclerView = findViewById(R.id.productList)
         productRecyclerView.layoutManager = LinearLayoutManager(this)
         productRecyclerView.setHasFixedSize(true)
-        productArrayList = arrayListOf<products>()
+        productArrayList = arrayListOf()
         productRecyclerView.adapter = ProductAdapter(productArrayList)
 
 
@@ -68,7 +68,7 @@ class menuActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     for (productsSnapshot in snapshot.children) {
-                        val product = productsSnapshot.getValue(products::class.java)
+                        val product = productsSnapshot.getValue(Products::class.java)
                         productArrayList.add(product!!)
                     }
                     productRecyclerView.adapter = ProductAdapter(productArrayList)
@@ -105,14 +105,18 @@ class menuActivity : AppCompatActivity() {
         val btnLogOut = findViewById<ImageButton>(R.id.btnLogOut)
         btnLogOut.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
-            Toast.makeText(this, applicationContext.getString(R.string.btnLogOut), Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                this,
+                applicationContext.getString(R.string.btnLogOut),
+                Toast.LENGTH_LONG
+            ).show()
             val intent = Intent(this, MainActivity::class.java);
             startActivity(intent)
         }
     }
 }
 
-class ProductAdapter(private val productList: ArrayList<products>) :
+class ProductAdapter(private val productList: ArrayList<Products>) :
     RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
 
 

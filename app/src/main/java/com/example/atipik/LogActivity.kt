@@ -1,16 +1,18 @@
 package com.example.atipik
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.firestore.FirebaseFirestore
 
 lateinit var dbref: DatabaseReference
 private lateinit var logRecyclerView: RecyclerView
@@ -28,10 +30,11 @@ class LogActivity : AppCompatActivity() {
         logRecyclerView = findViewById(R.id.recyclerViewLogs)
         logRecyclerView.layoutManager = LinearLayoutManager(this)
         logRecyclerView.setHasFixedSize(true)
-        logArrayList = arrayListOf<ShoppingList>()
+        logArrayList = arrayListOf()
         logRecyclerView.adapter = NewLogAdapter(logArrayList)
 
         getLogs()
+        logOut()
     }
 
     private fun getLogs() {
@@ -53,6 +56,21 @@ class LogActivity : AppCompatActivity() {
                 print("****** onCancelled ******")
             }
         })
+    }
+
+    private fun logOut() {
+
+        val btnLogOut = findViewById<ImageButton>(R.id.btnLogOutBackoffice)
+        btnLogOut.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            Toast.makeText(
+                this,
+                applicationContext.getString(R.string.btnLogOut),
+                Toast.LENGTH_LONG
+            ).show()
+            val intent = Intent(this, MainActivity::class.java);
+            startActivity(intent)
+        }
     }
 }
 
